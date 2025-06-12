@@ -34,8 +34,8 @@ class Carnivore(Animal):
         if isinstance(target, Herbivore):  # Ensure the target is a Herbivore
             if not target.hidden:  # If the target is not hiding
                 target.health -= 50  # Reduce target's health by 50
-                if target.health <= 0:  # If health drops to 0 or below
-                    Animal.alive.remove(target)  # Remove the herbivore from the alive list
-                    target.health = 0  # Set health to 0 for the dead herbivore
+            # If the herbivore's health goes to 0 or below, it will be removed by remove_dead
             elif target.hidden:  # If the herbivore is hiding
                 return  # Do nothing if the herbivore is hiding
+        # Call remove_dead() after a bite to ensure dead animals are removed
+        Animal.remove_dead()
